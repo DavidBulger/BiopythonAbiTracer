@@ -11,6 +11,9 @@ from Bio import SeqIO
 from Bio._py3k import _as_bytes
 
 test_data = {
+'data_bulcher': {
+              'id': 'wrongvalue',
+},
 'data_empty': {
               'path': ['Abi', 'empty.ab1'],
               'seq': 'NNNNN',
