@@ -11,6 +11,7 @@ Sequence called heterozygous or homozygous for mutation.
 
 import sys
 import os
+import csv
 from Bio import AbiTracer
 from Bio.Seq import Seq
 
@@ -18,9 +19,9 @@ from Bio.Seq import Seq
 if len(sys.argv) > 1:
     file_location = sys.argv[1]
 else:
-    file_location = "/home/bulgerda/Desktop/"
+    file_location = "C:\\Users\\Bulger\\Documents\\GitHub\\biopython\\Tests\\Abi"
 
-#os.chdir(file_location)
+os.chdir(file_location)
 
 # Open CSV Storage
 # Generate 2D array to store mutation data (currently stores up to 100)
@@ -104,7 +105,7 @@ if NewMutantData is "Y":
 if len(sys.argv) > 1:
     file_location = sys.argv[1]
 else:
-    file_location = "/home/bulgerda/Desktop/Seq6_2"
+    file_location = "C:\\Users\\Bulger\\Documents\\GitHub\\biopython\\Tests\\Abi"
 
 #os.chdir(file_location)
 
@@ -209,7 +210,7 @@ for shortfn in files:
     except AbiTracer.ABIVersionError, e:
         print 'error', e, fn
 		# continue
-    print file_name
+    print shortfn
 
     # gk loop in order to batch process all mutations
     n = -1
