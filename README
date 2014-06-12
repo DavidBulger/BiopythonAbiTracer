@@ -1,6 +1,63 @@
-David,
+SeqEval README file
+=====================
 
-Edit this file and tell me how I can test your new feature.
+The SeqEval program evaluates mutant sequences in *.abi files commonly provided
+during Sanger Sequencing. 
+
+This program serves to expedite heterozygous and homozygous mutant analysis from *.abi
+files. For heterozygous mutations to be called, the program needs to 
+evaluate the actual peak heights of all four base calls by directly
+reading the four trace files. Thus, a second program, AbiTracer, has been
+added. AbiTracer started with the previous BioPython Abi file reader by Wibowo Arindrarto
+and Peter Cock, which reads the quality scores and default peak calls. Then,
+the seqtrace-0.9.0 program by Brian J. Stucky provided the heart of the
+AbiTracer with excellent methods of directly reading the trace file information
+for all four bases. Overall, AbiTracer uses a similar input and output as
+the previous Abi reader with the core code modified from seqtrace-0.9.0.
+
+SeqEval takes the information provided by AbiTracer and evaluates the 
+sequences several ways. It searches for 20 base pairs preceding the 
+mutation site in the default base call result. Then at the mutation site,
+it pulls the individual trace file peak heights to provide the intensity
+of each base. Next, it checks which peaks are greater than the average of
+the four bases. With this information, the program can decide if the site
+of mutation is homozygous wild type (contains only the wild-type base),
+homozygous mutant (contains only the mutant base), or heterozygous
+mutant (contains both the wild-type and mutant bases).
+
+An additional feature was added to help manage the list of mutations
+being searched. When SeqEval is first run, the program asks if the user
+would like to view the current list of mutations. A sample list of mutations
+is provided for testing. These lists are in *.csv format and can easily
+be edited in other programs. The list contains four categories of information
+for each mutation: name, 20 base pair search, mutant base, and wild-type
+base. 
+
+After the user decides whether or not to view the list, the program asks if
+a new mutation needs to be added to the list. If the user chooses to add
+a new mutation, a series of prompts will direct the user to add all four
+pieces of information required for the sequence evaluation. If the mutation
+has already been added or the information is in an incorrect format, the
+program will remind the user and request that the information be entered
+again. Finally, the program provides a final check at the end to confirm
+that the mutation information is correct.
+
+Once the program has read the mutation list, the *.abi files are batch
+processed to expedite the analysis of multiple files. The *.abi files
+simply must be in the correct folder. Currently, this folder is the Abi 
+Test folder, but this can be changed to a more convenient folder by the
+user later.
+
+After evaluating the *.abi files for each of the mutations, the programs
+sends the output directly to the terminal in an easy to read format. By
+quickly scanning this output, the user can easily evaluate each of the
+mutations of interest in all the *.abi files provided.
+
+Please let me know if you have any suggestions or comments.
+
+All the Best,
+David
+davidabulger@gmail.com 
 
 
 
