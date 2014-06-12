@@ -19,7 +19,7 @@ from Bio.Seq import Seq
 if len(sys.argv) > 1:
     file_location = sys.argv[1]
 else:
-    file_location = "C:\\Users\\Bulger\\Documents\\GitHub\\biopython\\Tests\\Abi"
+    file_location = "C:\\Users\\Bulger\\Documents\\GitHub\\biopython\\Tests\\CSV"
 
 os.chdir(file_location)
 
@@ -107,7 +107,7 @@ if len(sys.argv) > 1:
 else:
     file_location = "C:\\Users\\Bulger\\Documents\\GitHub\\biopython\\Tests\\Abi"
 
-#os.chdir(file_location)
+os.chdir(file_location)
 
 # File Name
 files = os.listdir(file_location)
