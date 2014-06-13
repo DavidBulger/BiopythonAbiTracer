@@ -191,6 +191,10 @@ print "_________________________________________________________________________
 # for loop in order to batch process files
 for shortfn in files:
     # Import file
+    if ".ab1" not in shortfn:
+        print shortfn + " does not end in .ab1 or .abi"
+        continue
+
     fn = os.path.join(file_location, shortfn)
     try:
         for record in AbiTracer.AbiIterator(fn):
