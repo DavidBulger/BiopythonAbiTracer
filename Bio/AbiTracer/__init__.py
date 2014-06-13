@@ -65,7 +65,7 @@ def AbiIterator(input_file_name, trim=False):
         raise ABIError('The ABI file header is invalid.  The file appears to be damaged.')
     #print version
     if (version / 100) != 1:
-        raise ABIVersionError(version / 100, version % 100)
+	    raise ABIVersionError(version / 100, version % 100)
         
     # skip the next 10 bytes
     abi.read(10)
