@@ -7,15 +7,11 @@ during Sanger Sequencing.
 This program serves to expedite heterozygous and homozygous mutant analysis from *.abi
 files. For heterozygous mutations to be called, the program needs to 
 evaluate the actual peak heights of all four base calls by directly
-reading the four trace files. Thus, a second program, AbiTracer, has been
-added. AbiTracer started with the previous BioPython Abi file reader by Wibowo Arindrarto
-and Peter Cock, which reads the quality scores and default peak calls. Then,
-the seqtrace-0.9.0 program by Brian J. Stucky provided the heart of the
-AbiTracer with excellent methods of directly reading the trace file information
-for all four bases. Overall, AbiTracer uses a similar input and output as
-the previous Abi reader with the core code modified from seqtrace-0.9.0.
+reading the four trace files. Thus, AbiIO and SeqRecord were updated to
+make program continue reading processed trace files and base-call positions from
+the *.abi files.
 
-SeqEval takes the information provided by AbiTracer and evaluates the 
+SeqEval takes the information provided by AbiIO and evaluates the 
 sequences several ways. It searches for 20 base pairs preceding the 
 mutation site in the default base call result. Then at the mutation site,
 it pulls the individual trace file peak heights to provide the intensity
