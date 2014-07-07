@@ -1,6 +1,7 @@
 # Copyright 2000-2002 Andrew Dalke.
 # Copyright 2002-2004 Brad Chapman.
 # Copyright 2006-2010 by Peter Cock.
+# Revisions copyright 2014 by David Bulger.
 # All rights reserved.
 # This code is part of the Biopython distribution and governed by its
 # license.  Please see the LICENSE file that should have been included
@@ -152,6 +153,11 @@ class SeqRecord(object):
     def __init__(self, seq, id = "<unknown id>", name = "<unknown name>",
                  description = "<unknown description>", dbxrefs = None,
                  features = None, annotations = None,
+                 data1 = None,
+                 data2 = None,
+                 data3 = None,
+                 data4 = None,
+                 pos = None,
                  letter_annotations = None):
         """Create a SeqRecord.
 
@@ -192,6 +198,11 @@ class SeqRecord(object):
         self.id = id
         self.name = name
         self.description = description
+        self.data1 = data1
+        self.data2 = data2
+        self.data3 = data3
+        self.data4 = data4
+        self.pos = pos
 
         # database cross references (for the whole sequence)
         if dbxrefs is None:
