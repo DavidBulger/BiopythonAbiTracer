@@ -1,5 +1,6 @@
 # Copyright 2011 by Wibowo Arindrarto (w.arindrarto@gmail.com)
 # Revisions copyright 2011 by Peter Cock.
+# Revisions copyright 2014 by David Bulger.
 # This code is part of the Biopython distribution and governed by its
 # license. Please see the LICENSE file that should have been included
 # as part of this package.
@@ -29,6 +30,8 @@ from Bio.SeqRecord import SeqRecord
 from Bio._py3k import _bytes_to_string, _as_bytes
 from Bio._py3k import zip
 
+
+
 # dictionary for determining which tags goes into SeqRecord annotation
 # each key is tag_name + tag_number
 # if a tag entry needs to be added, just add its key and its key
@@ -44,6 +47,11 @@ _EXTRACT = {
 _SPCTAGS = [
     'PBAS2',    # base-called sequence
     'PCON2',    # quality values of base-called sequence
+    'DATA9',    # processed data1
+    'DATA10',   # processed data2
+    'DATA11',   # processed data3
+    'DATA12',   # processed data4
+    'PLOC1',    # Positions of the base calling locations
     'SMPL1',    # sample id inputted before sequencing run
     'RUND1',    # run start date
     'RUND2',    # run finish date
@@ -76,7 +84,6 @@ _BYTEFMT = {
 _HEADFMT = '>H4sI2H3I'
 # directory data structure
 _DIRFMT = '>4sI2H4I'
-
 
 def AbiIterator(handle, alphabet=None, trim=False):
     """Iterator for the Abi file format.
@@ -135,6 +142,21 @@ def AbiIterator(handle, alphabet=None, trim=False):
         # PCON2 is quality values of base-called sequence
         elif key == 'PCON2':
             qual = [ord(val) for val in tag_data]
+        # DATA9 is first processed trace data set
+        elif key == 'DATA9':
+            data9 = tag_data
+        # DATA10 is second processed trace data set
+        elif key == 'DATA10':
+            data10 = tag_data
+        # DATA11 is third processed trace data set
+        elif key == 'DATA11':
+            data11 = tag_data
+        # DATA12 is fourth processed trace data set
+        elif key == 'DATA12':
+            data12 = tag_data
+        # PLOC1 is location for each base call position
+        elif key == 'PLOC1':
+            ploc1 = tag_data
         # SMPL1 is sample id entered before sequencing run
         elif key == 'SMPL1':
             sample_id = tag_data
@@ -159,6 +181,11 @@ def AbiIterator(handle, alphabet=None, trim=False):
                        id=sample_id, name=file_name,
                        description='',
                        annotations=annot,
+                       data1=data9,
+                       data2=data10,
+                       data3=data11,
+                       data4=data12,
+                       pos=ploc1,
                        letter_annotations={'phred_quality': qual})
 
     if not trim:
